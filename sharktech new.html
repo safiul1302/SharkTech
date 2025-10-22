@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SharkTech — Smart Digital Solutions</title>
+  <meta name="description" content="SharkTech builds fast websites, CRM systems, POS platforms and e-commerce solutions for small businesses. Get a free demo today." />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#050915; --panel:#071022; --neon:#00e7ff; --muted:#9fdff0;
+      --glass: rgba(255,255,255,0.04);
+      --card-border: rgba(0,230,255,0.14);
+      --radius:16px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:"Poppins",system-ui,Segoe UI,Roboto,Arial;
+      background:var(--bg);
+      color:#eaf9ff;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      overflow-x:hidden;
+      scroll-behavior:smooth;
+    }
+
+    /* NAV */
+    header{
+      position:fixed;left:0;right:0;top:0;z-index:999;
+      display:flex;align-items:center;justify-content:space-between;
+      padding:18px 36px;
+      background:linear-gradient(180deg, rgba(7,16,34,0.6), rgba(7,16,34,0.3));
+      border-bottom:1px solid rgba(0,230,255,0.06);
+      backdrop-filter: blur(6px);
+    }
+    .brand{display:flex;align-items:center;gap:12px}
+    /* Inline SVG logo size */
+    .logo-svg{width:48px;height:48px;display:block}
+    .brand h1{font-size:20px;margin:0;color:var(--neon);text-shadow:0 0 10px rgba(0,230,255,0.16)}
+    nav ul{list-style:none;display:flex;gap:20px;margin:0;padding:0}
+    nav a{color:var(--muted);text-decoration:none;font-weight:600}
+    nav a:hover{color:var(--neon);text-shadow:0 0 8px rgba(0,230,255,0.12)}
+
+    /* HERO */
+    .hero{min-height:92vh;display:flex;align-items:center;justify-content:center;padding:120px 20px 60px;position:relative;overflow:hidden}
+    .grid-bg{
+      position:absolute;inset:-20% -30% auto -30%;height:160%;width:160%;
+      background:
+        radial-gradient(circle at 40% 20%, rgba(0,230,255,0.04), transparent 10%),
+        linear-gradient(115deg, rgba(0,230,255,0.05) 1px, transparent 1px),
+        linear-gradient(245deg, rgba(0,230,255,0.05) 1px, transparent 1px);
+      background-size:120px 120px;
+      transform:translate3d(0,0,0);
+      animation: drift 18s linear infinite;
+      filter: contrast(1.05) saturate(1.1);
+      z-index:0;
+    }
+    @keyframes drift{
+      0%{transform:translate(0,0)}
+      50%{transform:translate(-30px,-12px)}
+      100%{transform:translate(0,0)}
+    }
+
+    .hero-inner{position:relative;z-index:2;max-width:1100px;padding:20px;text-align:left;display:grid;grid-template-columns:1fr 420px;gap:40px;align-items:center}
+    .hero-copy h2{font-size:36px;margin:0 0 18px;color:var(--neon);text-shadow:0 0 22px rgba(0,230,255,0.12)}
+    .hero-copy h1{font-size:44px;margin:0 0 18px;line-height:1.05}
+    .hero-copy p{color:#bfefff;margin-bottom:22px}
+    .hero-ctas{display:flex;gap:16px;flex-wrap:wrap}
+    .cta{background:var(--neon);color:#012;padding:12px 22px;border-radius:50px;font-weight:700;text-decoration:none;box-shadow:0 0 18px rgba(0,230,255,0.16)}
+    .cta.secondary{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
+
+    /* right card (quick features) */
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border:1px solid var(--card-border);
+      padding:22px;border-radius:16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.45);
+    }
+    .card h4{margin:0 0 12px;color:var(--neon)}
+    .feature-list{display:flex;flex-direction:column;gap:12px}
+    .feature{display:flex;gap:12px;align-items:center}
+    .dot{width:12px;height:12px;border-radius:50%;background:linear-gradient(180deg,var(--neon),#00c7ff);box-shadow:0 0 12px rgba(0,230,255,0.12)}
+
+    /* ABOUT + SERVICES + PRICING + PORTFOLIO */
+    main{position:relative;z-index:3}
+    section{padding:80px 20px}
+    .section-title{color:var(--neon);font-size:28px;margin-bottom:18px;text-align:center;text-shadow:0 0 12px rgba(0,230,255,0.08)}
+    .about p{max-width:900px;margin:0 auto;color:#cfefff;line-height:1.7;text-align:center}
+
+    /* services grid */
+    .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px;margin-top:28px;max-width:1100px;margin-left:auto;margin-right:auto}
+    .svc{background:var(--glass);border:1px solid var(--card-border);padding:22px;border-radius:14px;text-align:center}
+    .svc h3{color:var(--neon);margin-bottom:8px}
+    .svc p{color:#bfefff;font-size:0.95rem}
+
+    /* pricing */
+    .pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;max-width:1100px;margin:30px auto 0}
+    .plan{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:14px;padding:20px;border:1px solid var(--card-border);text-align:center}
+    .plan.popular{border:2px solid var(--neon);transform:scale(1.03)}
+    .plan h4{color:var(--neon);margin-bottom:6px}
+    .plan h2{font-size:34px;margin:6px 0;color:#fff}
+    .plan ul{list-style:none;padding:0;margin:10px 0;color:#bfefff}
+    .plan button{background:var(--neon);border:none;padding:10px 18px;border-radius:40px;font-weight:700;cursor:pointer;color:#012;box-shadow:0 0 18px rgba(0,230,255,0.12)}
+
+    /* portfolio */
+    .portfolio-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;max-width:1100px;margin:30px auto}
+    .proj{position:relative;border-radius:12px;overflow:hidden;border:1px solid var(--card-border)}
+    .proj img{width:100%;height:220px;object-fit:cover;display:block;transition:transform .5s, filter .5s}
+    .proj:hover img{transform:scale(1.08);filter:brightness(.6)}
+    .proj .label{position:absolute;left:0;right:0;bottom:0;padding:12px;background:linear-gradient(180deg, transparent, rgba(0,0,0,0.5));color:#fff;font-weight:600;text-align:center}
+
+    /* contact */
+    .contact-wrap{display:grid;grid-template-columns:1fr 420px;gap:30px;max-width:1100px;margin:0 auto}
+    form{background:var(--glass);padding:20px;border-radius:12px;border:1px solid var(--card-border)}
+    label{display:block;margin:12px 0 6px;color:#ccf}
+    input,textarea,select{width:100%;padding:12px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:#eaf9ff}
+    textarea{min-height:140px;resize:vertical}
+    .submit-row{display:flex;gap:12px;align-items:center;margin-top:12px}
+    .whatsapp{display:inline-block;background:#25D366;color:#012;padding:10px 12px;border-radius:10px;text-decoration:none;font-weight:700}
+    .form-note{font-size:0.9rem;color:#aee}
+
+    /* footer */
+    footer{padding:28px 20px;text-align:center;color:#9fdff0;border-top:1px solid rgba(0,230,255,0.06);margin-top:40px}
+
+    /* lang toggle */
+    .lang-toggle{position:fixed;right:18px;bottom:18px;background:var(--glass);padding:8px;border-radius:12px;border:1px solid var(--card-border);display:flex;gap:8px;z-index:999}
+    .lang-toggle button{background:transparent;border:none;color:var(--muted);padding:8px 10px;border-radius:8px;cursor:pointer}
+    .lang-toggle button.active{background:var(--neon);color:#012;box-shadow:0 0 12px rgba(0,230,255,0.12)}
+
+    /* responsive */
+    @media (max-width:992px){
+      .hero-inner{grid-template-columns:1fr; text-align:center}
+      .contact-wrap{grid-template-columns:1fr}
+      .hero-copy h1{font-size:28px}
+      .hero-copy h2{font-size:20px}
+    }
+    @media (max-width:560px){
+      header{padding:12px 16px}
+      nav ul{display:none}
+      .brand h1{font-size:18px}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <header>
+    <div class="brand">
+      <!-- Inline SVG logo (neon shark) -->
+      <svg class="logo-svg" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <linearGradient id="g1" x1="0" x2="1">
+            <stop offset="0" stop-color="#00e7ff"/>
+            <stop offset="1" stop-color="#00a8ff"/>
+          </linearGradient>
+        </defs>
+        <!-- stylized circuit shark -->
+        <path d="M6 32c6-8 18-14 30-14 6 0 10 2 16 6-2 0-6 2-8 4-4 4-8 8-14 10-6 2-10-2-14-6-3-3-8-6-10-10z"
+          fill="none" stroke="url(#g1)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="0.98"/>
+        <path d="M44 18c6 3 9 11 6 18" fill="none" stroke="url(#g1)" stroke-width="1.6" stroke-linecap="round"/>
+        <circle cx="46" cy="24" r="0.8" fill="url(#g1)"/>
+      </svg>
+
+      <h1>SharkTech</h1>
+    </div>
+
+    <nav aria-label="Main navigation">
+      <ul>
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" id="hero" aria-label="Hero section">
+    <div class="grid-bg" aria-hidden="true"></div>
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <h2>Transform faster — scale smarter</h2>
+        <h1>Empower Your Business with Smart Digital Solutions</h1>
+        <p>SharkTech builds high-performance websites, CRM systems, POS platforms and e-commerce solutions that help businesses automate, sell more, and operate securely.</p>
+        <div class="hero-ctas">
+          <a class="cta" href="#contact">Get Your Free Demo</a>
+          <a class="cta secondary" href="#services">Explore Services</a>
+        </div>
+      </div>
+
+      <aside class="card" aria-hidden="false">
+        <h4>Why SharkTech</h4>
+        <div class="feature-list">
+          <div class="feature"><span class="dot"></span><div><strong>Fast delivery</strong><div style="color:#bfefff;font-size:13px">Launch in days, not weeks</div></div></div>
+          <div class="feature"><span class="dot"></span><div><strong>24/7 Support</strong><div style="color:#bfefff;font-size:13px">Realtime maintenance & monitoring</div></div></div>
+          <div class="feature"><span class="dot"></span><div><strong>Custom CRM & POS</strong><div style="color:#bfefff;font-size:13px">Tailored to your workflow</div></div></div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <main>
+
+    <!-- ABOUT -->
+    <section id="about" class="about">
+      <div class="section-title">About SharkTech</div>
+      <p><strong>SharkTech</strong> was founded by <strong>MD Safiul Islam</strong> to empower small businesses with modern, reliable digital systems. From performance websites to fully integrated CRM and POS platforms — we focus on results, security, and growth.</p>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services">
+      <div class="section-title">Our Services</div>
+      <div class="services-grid">
+        <div class="svc">
+          <h3>Website Development</h3>
+          <p>Responsive, SEO-friendly websites designed to convert visitors into customers.</p>
+        </div>
+        <div class="svc">
+          <h3>CRM Systems</h3>
+          <p>Custom CRM solutions to manage leads, automate workflows and track performance.</p>
+        </div>
+        <div class="svc">
+          <h3>E-Commerce Solutions</h3>
+          <p>Secure online stores with payment integrations, inventory, and analytics.</p>
+        </div>
+        <div class="svc">
+          <h3>POS Systems</h3>
+          <p>Modern POS with inventory, billing, and real-time sales analytics.</p>
+        </div>
+        <div class="svc">
+          <h3>Business Automation</h3>
+          <p>Automate repetitive tasks so you can focus on growth and operations.</p>
+        </div>
+        <div class="svc">
+          <h3>Branding & Digital Marketing</h3>
+          <p>From logos to ad campaigns — grow your brand and reach customers.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRICING -->
+    <section id="pricing">
+      <div class="section-title">Pricing Plans</div>
+      <p style="text-align:center;color:#aee">Transparent pricing to fit your needs. Custom enterprise quotes available.</p>
+      <div class="pricing-grid">
+        <div class="plan">
+          <h4>Starter</h4>
+          <h2>$99</h2>
+          <ul>
+            <li>1 Page Website</li>
+            <li>Responsive Design</li>
+            <li>Basic SEO</li>
+            <li>3 Days Delivery</li>
+          </ul>
+          <button onclick="scrollToContact('Starter')">Get Started</button>
+        </div>
+
+        <div class="plan popular">
+          <h4>Business</h4>
+          <h2>$299</h2>
+          <ul>
+            <li>5 Page Dynamic Site</li>
+            <li>Admin Dashboard</li>
+            <li>Advanced SEO</li>
+            <li>7 Days Delivery</li>
+          </ul>
+          <button onclick="scrollToContact('Business')">Get Started</button>
+        </div>
+
+        <div class="plan">
+          <h4>Enterprise</h4>
+          <h2>$599</h2>
+          <ul>
+            <li>Custom Web App / CRM / POS</li>
+            <li>Unlimited Pages</li>
+            <li>Priority Support</li>
+            <li>10 Days Delivery</li>
+          </ul>
+          <button onclick="scrollToContact('Enterprise')">Get Started</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- PORTFOLIO -->
+    <section id="portfolio">
+      <div class="section-title">Our Portfolio</div>
+      <p style="text-align:center;color:#aee">Selected projects — websites, CRM dashboards, and e-commerce systems.</p>
+      <div class="portfolio-grid">
+        <div class="proj"><img src="https://source.unsplash.com/800x600/?website,design" alt="Project 1"><div class="label">Business Website</div></div>
+        <div class="proj"><img src="https://source.unsplash.com/800x600/?dashboard,crm" alt="Project 2"><div class="label">Custom CRM</div></div>
+        <div class="proj"><img src="https://source.unsplash.com/800x600/?ecommerce,store" alt="Project 3"><div class="label">E-Commerce Store</div></div>
+        <div class="proj"><img src="https://source.unsplash.com/800x600/?pos,shop" alt="Project 4"><div class="label">POS Integration</div></div>
+      </div>
+      <div style="text-align:center;margin-top:18px"><a class="cta" href="#portfolio">See More Projects</a></div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="section-title">Contact & Request Demo</div>
+      <p style="text-align:center;color:#aee">Fill this quick form — we typically respond within a few hours.</p>
+
+      <div class="contact-wrap">
+        <!-- FORM (Netlify-ready). To use Netlify forms, keep data-netlify="true" and deploy to Netlify -->
+        <form id="contactForm" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="return handleSubmit(event)">
+          <!-- Netlify hidden inputs -->
+          <input type="hidden" name="form-name" value="contact">
+          <p style="display:none"><label>Don’t fill: <input name="bot-field"></label></p>
+
+          <label for="name">Full name</label>
+          <input id="name" name="name" required placeholder="Your full name" />
+
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" required placeholder="you@company.com" />
+
+          <label for="phone">Phone (WhatsApp preferred)</label>
+          <input id="phone" name="phone" placeholder="+8801XXXXXXXXX" />
+
+          <label for="serviceSelect">Service of interest</label>
+          <select id="serviceSelect" name="service">
+            <option>Website Development</option>
+            <option>CRM System</option>
+            <option>POS & Billing</option>
+            <option>E-commerce</option>
+            <option>Full Package</option>
+          </select>
+
+          <label for="message">Message / Project brief</label>
+          <textarea id="message" name="message" placeholder="Describe your needs"></textarea>
+
+          <div class="submit-row">
+            <button type="submit" class="cta">Send Request</button>
+            <a class="whatsapp" href="https://wa.me/8801955240211" target="_blank" rel="noopener">Chat on WhatsApp</a>
+          </div>
+
+          <div class="form-note">Or email us: <a href="mailto:info@sharktech.example" style="color:var(--neon)">info@sharktech.example</a></div>
+        </form>
+
+        <!-- RIGHT: Quick contact + logo -->
+        <aside class="card" style="display:flex;flex-direction:column;gap:12px;justify-content:center;align-items:center">
+          <!-- Use the inline SVG logo again for brand -->
+          <svg class="" style="width:100px;height:100px" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs><linearGradient id="g2" x1="0" x2="1"><stop offset="0" stop-color="#00e7ff"/><stop offset="1" stop-color="#00a8ff"/></linearGradient></defs>
+            <path d="M6 32c6-8 18-14 30-14 6 0 10 2 16 6-2 0-6 2-8 4-4 4-8 8-14 10-6 2-10-2-14-6-3-3-8-6-10-10z"
+              fill="none" stroke="url(#g2)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="0.98"/>
+            <path d="M44 18c6 3 9 11 6 18" fill="none" stroke="url(#g2)" stroke-width="1.6" stroke-linecap="round"/>
+            <circle cx="46" cy="24" r="0.8" fill="url(#g2)"/>
+          </svg>
+
+          <div style="text-align:center">
+            <strong style="color:var(--neon)">SharkTech</strong>
+            <div style="color:#cfefff;font-size:14px">Website • CRM • POS • eCommerce</div>
+          </div>
+
+          <div style="text-align:center;color:#aee;font-size:14px">Phone: <a href="tel:+8801955240211" style="color:var(--neon)">+880 1770679949</a></div>
+          <div style="text-align:center;color:#aee;font-size:14px">Email: <a href="mailto:info@sharktech.example" style="color:var(--neon)">info@sharktech.ai</a></div>
+        </aside>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    © <span id="year"></span> SharkTech — Smart Digital Solutions for Modern Businesses • Designed in Bangladesh
+  </footer>
+
+  <!-- LANGUAGE FLOATER -->
+  <div class="lang-toggle" aria-hidden="false">
+    <button id="btn-en" class="active" aria-pressed="true">EN</button>
+    <button id="btn-bn">বাংলা</button>
+  </div>
+
+  <script>
+    // Year
+    document.getElementById('year').innerText = new Date().getFullYear();
+
+    // Language toggle content (English & Bangla)
+    const en = {
+      about: "SharkTech was founded by MD Safiul Islam to empower businesses through intelligent web technologies. We build fast, secure, and modern systems—from websites to CRM and POS software.",
+      services: [
+        "Website Development","CRM Systems","E-Commerce Solutions","POS Systems","Business Automation","Branding & Digital Marketing"
+      ],
+      heroTitle: "Empower Your Business with Smart Digital Solutions",
+      heroLead: "SharkTech builds high-performance websites, CRM systems, POS platforms and e-commerce solutions that help businesses automate, sell more, and operate securely."
+    };
+    const bn = {
+      about: "শার্কটেক প্রতিষ্ঠা করেছেন এমডি সাফিউল ইসলাম, ব্যবসায়িক অটোমেশন ও স্মার্ট ওয়েব প্রযুক্তির মাধ্যমে প্রতিষ্ঠানগুলোকে আরও শক্তিশালী করতে। আমরা ওয়েবসাইট, সিআরএম ও পিওএস সিস্টেম তৈরি করি দ্রুত, নিরাপদ ও আধুনিকভাবে।",
+      services: [
+        "ওয়েবসাইট ডেভেলপমেন্ট","সিআরএম সিস্টেম","ই-কমার্স সলিউশন","পিওএস সিস্টেম","বিজনেস অটোমেশন","ব্র্যান্ডিং ও ডিজিটাল মার্কেটিং"
+      ],
+      heroTitle: "আপনার ব্যবসাকে শক্তিশালী করুন স্মার্ট ডিজিটাল সলিউশন দিয়ে",
+      heroLead: "শার্কটেক তৈরি করে উচ্চ পারফরম্যান্স ওয়েবসাইট, সিআরএম এবং পিওএস প্ল্যাটফর্ম যা ব্যবসাকে অটোমেট, বিক্রি বাড়াতে এবং নিরাপদে পরিচালনা করতে সাহায্য করে।"
+    };
+
+    function setLanguage(langObj){
+      document.querySelector('#about p').innerText = langObj.about;
+      // services (update headings)
+      document.querySelectorAll('.services-grid .svc').forEach((el,i)=> {
+        el.querySelector('h3').innerText = langObj.services[i];
+      });
+      document.querySelector('.hero-copy h1').innerText = langObj.heroTitle;
+      document.querySelector('.hero-copy p').innerText = langObj.heroLead;
+    }
+
+    // Toggle handlers
+    const btnEn = document.getElementById('btn-en'), btnBn = document.getElementById('btn-bn');
+    btnEn.addEventListener('click', ()=>{btnEn.classList.add('active');btnBn.classList.remove('active');setLanguage(en)});
+    btnBn.addEventListener('click', ()=>{btnBn.classList.add('active');btnEn.classList.remove('active');setLanguage(bn)});
+
+    // initialize English
+    setLanguage(en);
+
+    // Scroll-to-contact helper (populate form "service" field and scroll)
+    function scrollToContact(plan){
+      document.querySelector('#serviceSelect').value = plan;
+      document.querySelector('#contact').scrollIntoView({behavior:'smooth', block:'start'});
+    }
+
+    // Contact form handling (Netlify-ready). Fallback: mailto link
+    function handleSubmit(e){
+      e.preventDefault();
+      const form = document.getElementById('contactForm');
+      const data = new FormData(form);
+      const obj = {};
+      data.forEach((v,k)=>obj[k]=v);
+
+      // If deployed to Netlify, normal submit will work.
+      // For local testing, fallback to mailto
+      if(window.location.hostname === '' || window.location.hostname === 'localhost' || window.location.protocol === 'file:'){
+        // create mailto
+        const subject = encodeURIComponent("SharkTech Inquiry: " + (obj.service || 'General'));
+        const body = encodeURIComponent(`Name: ${obj.name}\nEmail: ${obj.email}\nPhone: ${obj.phone}\nService: ${obj.service}\n\nMessage:\n${obj.message}`);
+        window.location.href = `mailto:info@sharktech.example?subject=${subject}&body=${body}`;
+        return false;
+      }
+
+      // If on production, try to post to server (Netlify handles form automatically)
+      form.submit();
+      return true;
+    }
+
+  </script>
+</body>
+</html>
